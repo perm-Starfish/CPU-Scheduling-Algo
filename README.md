@@ -2,13 +2,13 @@
 > **Operating Systems - Assignment 2**  
 > Implement several CPU scheduling algorithms and propose an own one.
 
-## 1. Project Overview
+## Project Overview
 
 This repository contains a C++ implementation of various CPU scheduling algorithms. The primary goal is to simulate how a CPU scheduler manages the execution of multiple processes, demonstrating their behavior through Gantt charts and evaluating their performance metrics.
 
 The project schedules 10 processes, each with a randomly generated arrival time (0, 5, or 10 ms), burst time (6 to 28 ms), and priority (1 to 3, where 1 is highest).
 
-## 2. Implemented Algorithms
+## Implemented Algorithms
 
 The following CPU scheduling algorithms are implemented:
 
@@ -21,7 +21,7 @@ The following CPU scheduling algorithms are implemented:
     Processes are demoted to lower priority queues if they exhaust their time quantum.
 * **Custom Scheduling Algorithm: Priority-based SJF with Aging**: This algorithm combines features of SJF and priority scheduling. It is a preemptive algorithm that prioritizes processes based on a combination of priority (higher priority first) and remaining burst time (shorter burst time first). An "aging" mechanism is incorporated to prevent starvation: processes waiting in the ready queue for an extended period (e.g., 15ms) will have their priority incrementally boosted. This aims to improve fairness and reduce overall waiting times compared to a pure SJF or priority approach, especially when dealing with processes of varying priorities and burst times. This algorithm demonstrates an advantage in potentially achieving better average waiting and turnaround times by preventing low-priority processes from being indefinitely delayed.
 
-## 3. How to Compile and Run
+## How to Compile and Run
 
 To compile and run this project, you will need a C++ compiler (e.g., g++).
 
@@ -55,7 +55,7 @@ To compile and run this project, you will need a C++ compiler (e.g., g++).
     ```
     The program will output the initial process list, followed by the Gantt chart, turnaround times, waiting times, and context switch count for each implemented algorithm.
 
-## 4. Performance Metrics
+## Performance Metrics
 
 For each algorithm, the following metrics are displayed:
 
