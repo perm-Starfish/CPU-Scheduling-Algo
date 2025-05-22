@@ -21,7 +21,7 @@ The following CPU scheduling algorithms are implemented:
     Processes are demoted to lower priority queues if they exhaust their time quantum.
 * **Custom Scheduling Algorithm: Priority-based SJF with Aging**: This algorithm combines features of SJF and priority scheduling. It is a preemptive algorithm that prioritizes processes based on a combination of priority (higher priority first) and remaining burst time (shorter burst time first). An "aging" mechanism is incorporated to prevent starvation: processes waiting in the ready queue for an extended period (e.g., 15ms) will have their priority incrementally boosted. This aims to improve fairness and reduce overall waiting times compared to a pure SJF or priority approach, especially when dealing with processes of varying priorities and burst times. This algorithm demonstrates an advantage in potentially achieving better average waiting and turnaround times by preventing low-priority processes from being indefinitely delayed.
 
-## 4. How to Compile and Run
+## 3. How to Compile and Run
 
 To compile and run this project, you will need a C++ compiler (e.g., g++).
 
@@ -55,7 +55,7 @@ To compile and run this project, you will need a C++ compiler (e.g., g++).
     ```
     The program will output the initial process list, followed by the Gantt chart, turnaround times, waiting times, and context switch count for each implemented algorithm.
 
-## 5. Performance Metrics
+## 4. Performance Metrics
 
 For each algorithm, the following metrics are displayed:
 
