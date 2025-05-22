@@ -1,6 +1,6 @@
 # CPU-Scheduling-Algo
 > **Operating Systems - Assignment 2**  
-> Implement some CPU scheduling algorithms and propose an own one.
+> Implement several CPU scheduling algorithms and propose an own one.
 
 ## 1. Project Overview
 
