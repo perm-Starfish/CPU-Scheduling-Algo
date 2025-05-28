@@ -33,16 +33,16 @@ To compile and run this project, you will need a C++ compiler (e.g., g++).
 2.  **Compile the source files**:
     Use the following `g++` command. Ensure your compiler supports C++11 or later.
     ```bash
-    g++ -std=c++11 -Wall \
-        -Iheader \
-        source/Process.cpp \
-        source/Utils.cpp \
-        source/preeSJF.cpp \
-        source/RR_priority.cpp \
-        source/MLFQ.cpp \
-        source/custom.cpp \
-        source/main.cpp \
-        -o scheduling_simulator
+    g++ -std=c++11 -Wall ^
+       -Iheader ^
+       source\process.cpp ^
+       source\utils.cpp ^
+       source\preeSJF.cpp ^
+       source\RR_priority.cpp ^
+       source\MLFQ.cpp ^
+       source\custom.cpp ^
+       source\main.cpp ^
+       -o scheduling_simulator.exe
     ```
     * `-std=c++11`: Specifies C++11 standard.
     * `-Wall`: Enables all common warnings.
@@ -51,7 +51,7 @@ To compile and run this project, you will need a C++ compiler (e.g., g++).
 
 3.  **Run the executable**:
     ```bash
-    ./scheduling_simulator
+    scheduling_simulator.exe
     ```
     The program will output the initial process list, followed by the Gantt chart, turnaround times, waiting times, and context switch count for each implemented algorithm.
 
