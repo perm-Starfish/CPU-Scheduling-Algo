@@ -1,7 +1,7 @@
 #ifndef SCHEDULING_ALGORITHMS_H
 #define SCHEDULING_ALGORITHMS_H
 
-#include "Process.h"
+#include "process.h"
 #include <vector>
 
 void preemptive_sjf_scheduling(std::vector<Process> processes); // preemptive SJF
