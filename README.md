@@ -65,7 +65,7 @@ To compile and run this project, you will need a C++ compiler (e.g., g++).
      ```bash
      python plot_gantt.py
      ```
-     This will generate the Gantt chart images in PNG format (e.g. `preemptive_sjf_gantt_chart.png`, etc.) in the root directory of your project based on the data in `.csv`s.
+     This will generate the Gantt chart images in PNG format (e.g. `preemptive_sjf_gantt_chart.png`, etc.) in the root directory of your project based on the data in `.csv`.
 
 ## Performance Metrics
 
