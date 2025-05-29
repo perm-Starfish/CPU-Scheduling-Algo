@@ -53,7 +53,19 @@ To compile and run this project, you will need a C++ compiler (e.g., g++).
     ```bash
     scheduling_simulator.exe
     ```
-    The program will output the initial process list, followed by the Gantt chart, turnaround times, waiting times, and context switch count for each implemented algorithm.
+    The program will output the initial process list, followed by turnaround times, waiting times, and context switch count for each implemented algorithm.
+    Additionally, it'll output files includes `preeSJF_gantt_data.csv`, `RR_priority_gantt_data.csv`, `MLFQ_gantt_data.csv`, `custom_gantt_data.csv`. These files are the Gantt chart data of each scheduling algorithms, and we use them to generate Gantt chart pictures.
+
+4.   **Run the `.py` for Gantt charts**:
+     If you haven't install `pandas` and `matplotlib`, please install them:
+     ```bash
+     pip install pandas matplotlib
+     ```
+     Run the `.py`:
+     ```bash
+     python plot_gantt.py
+     ```
+     This will generate the Gantt chart images in PNG format (e.g. `preemptive_sjf_gantt_chart.png`, etc.) in the root directory of your project based on the data in `.csv`s.
 
 ## Performance Metrics
 
