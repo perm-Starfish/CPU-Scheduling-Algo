@@ -1,8 +1,9 @@
-#include "Utils.h"
+#include "utils.h"
 #include <iostream>
 #include <iomanip>
 #include <numeric> // For std::accumulate (if used for sums)
 #include <algorithm> // For std::sort (if used for sorting results by ID)
+#include <fstream> // For file operations
 
 using namespace std;
 
@@ -36,12 +37,11 @@ void print_results(const vector<Process>& processes, int context_switches, const
     cout << "-----------------------------------------------------------------------------------------\n";
     cout << "Average Turnaround Time: " << total_turnaround_time / processes.size() << " ms\n";
     cout << "Average Waiting Time: " << total_waiting_time / processes.size() << " ms\n";
-    cout << "Context Switches: " << context_switches << "\n"; // 上下文切換次數
+    cout << "Context Switches: " << context_switches << "\n";
 }
 
-// 列印甘特圖
 void print_gantt_chart(const map<int, int>& gantt_chart_data) {
-    cout << "\nGantt Chart:\n"; [cite: 10]
+    cout << "\nGantt Chart:\n";
     if (gantt_chart_data.empty()) {
         cout << "  [Empty]\n";
         return;
@@ -56,13 +56,13 @@ void print_gantt_chart(const map<int, int>& gantt_chart_data) {
     }
 
     cout << "Time:   ";
-    for (int t = 0; t <= max_time; ++t) {
+    for (int t = 0; t <= max_time; t++) {
         cout << setw(4) << t;
     }
     cout << "\n";
 
     cout << "Process:";
-    for (int t = 0; t <= max_time; ++t) {
+    for (int t = 0; t <= max_time; t++) {
         auto it = gantt_chart_data.find(t);
         int current_proc_id = (it != gantt_chart_data.end()) ? it->second : -1;
 
@@ -73,4 +73,22 @@ void print_gantt_chart(const map<int, int>& gantt_chart_data) {
         }
     }
     cout << "\n";
+}
+    // 新增：將甘特圖數據存到 CSV
+void save_gantt_chart_data_to_csv(const map<int, int>& gantt_chart_data, const string& filename) {
+    ofstream outfile(filename);
+    if (!outfile.is_open()) {
+        cerr << "Error: Could not open file " << filename << " for writing Gantt chart data." << endl;
+        return;
+    }
+
+    outfile << "Time,ProcessID\n"; // CSV 標頭
+
+    // 由於 map 是按鍵排序的，可以直接遍歷
+    for (const auto& entry : gantt_chart_data) {
+        outfile << entry.first << "," << entry.second << "\n";
+    }
+
+    outfile.close();
+    cout << "Gantt chart data saved to " << filename << endl;
 }
