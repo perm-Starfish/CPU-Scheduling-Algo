@@ -1,6 +1,6 @@
-#include "Process.h"
-#include "Utils.h"
-#include "SchedulingAlgorithms.h"
+#include "process.h"
+#include "utils.h"
+#include "scheduling.h"
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -11,7 +11,6 @@ using namespace std;
 int main() {
     int num_processes = 10;
 
-    // 生成一組行程
     vector<Process> initial_processes = generate_processes(num_processes);
 
     // 為了確保每個演算法使用完全相同的初始行程狀態，每次都複製一份
@@ -20,7 +19,6 @@ int main() {
     vector<Process> processes_for_mlfq = initial_processes;
     vector<Process> processes_for_custom = initial_processes;
 
-    // 列印初始行程資訊
     cout << "--- Initial Processes ---\n";
     cout << "Process ID | Arrival Time | Burst Time | Priority\n";
     cout << "--------------------------------------------------\n";
@@ -32,8 +30,6 @@ int main() {
     }
     cout << "--------------------------------------------------\n";
 
-
-    // 執行每個排程演算法
     preemptive_sjf_scheduling(processes_for_sjf); // preemptive SJF
     rr_priority_scheduling(processes_for_rr_priority); // RR + priority
     multilevel_feedback_queue_scheduling(processes_for_mlfq); // MLFQ
