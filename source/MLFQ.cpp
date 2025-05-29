@@ -1,5 +1,5 @@
-#include "SchedulingAlgorithms.h"
-#include "Utils.h"
+#include "scheduling.h"
+#include "utils.h"
 #include <algorithm>
 #include <queue>
 #include <map>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// 多級回饋佇列排程
+// multilevel feedback queue
 void multilevel_feedback_queue_scheduling(vector<Process> processes) {
     // 儲存原始副本用於結果輸出，並按ID排序
     vector<Process> original_processes = processes;
@@ -15,13 +15,12 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
         return a.id < b.id;
     });
 
-    // 定義三個佇列 [cite: 8]
     queue<int> q0; // RR with quantum 5ms
     queue<int> q1; // RR with quantum 10ms
     queue<int> q2; // FCFS
 
-    int quantum_q0 = 5;  // Q0 時間量子
-    int quantum_q1 = 10; // Q1 時間量子
+    int quantum_q0 = 5; 
+    int quantum_q1 = 10; 
 
     map<int, int> gantt_chart_data;
     int current_time = 0;
@@ -30,14 +29,14 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
     int context_switches = 0;
     int prev_proc_id = -1;
 
-    cout << "\n--- Starting Multilevel Feedback Queue Scheduling ---\n"; [cite: 8]
+    cout << "\n--- Starting Multilevel Feedback Queue Scheduling ---\n";
 
     // 追蹤每個行程所在的佇列 (0, 1, 2, -1表示已完成或未到達)
-    vector<int> process_queue_level(num_processes + 1, -1); // 索引對應 process ID
+    vector<int> process_queue_level(num_processes + 1, -1); // index to process ID
 
     while (completed_processes < num_processes) {
         // 將所有已到達且未完成的行程加入最高優先級佇列 (Q0)
-        for (int i = 0; i < num_processes; ++i) {
+        for (int i = 0; i < num_processes; i++) {
             if (processes[i].arrival_time <= current_time && processes[i].remaining_burst_time > 0) {
                 // 如果行程尚未進入任何佇列 (或已完成但被重置)，則加入 Q0
                 // 這裡的 -2 用於標記已添加到 Q0 但還未被處理的行程，避免重複添加
@@ -53,7 +52,7 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
         int current_quantum = 0;
         int current_queue_level = -1;
 
-        // 檢查佇列優先順序：Q0 -> Q1 -> Q2
+        // priority: Q0 -> Q1 -> Q2
         if (!q0.empty()) {
             current_proc_id = q0.front();
             q0.pop();
@@ -82,7 +81,7 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
         }
 
         // 找到對應的行程物件
-        for(size_t i = 0; i < processes.size(); ++i) {
+        for(size_t i = 0; i < processes.size(); i++) {
             if (processes[i].id == current_proc_id) {
                 current_proc_idx = i;
                 break;
@@ -91,7 +90,7 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
         Process& current_proc = processes[current_proc_idx];
 
         if (prev_proc_id != -1 && prev_proc_id != current_proc.id) {
-            context_switches++; // 增加上下文切換次數
+            context_switches++;
         }
         prev_proc_id = current_proc.id;
 
@@ -102,8 +101,8 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
         
         int execute_time = min(current_quantum, current_proc.remaining_burst_time);
 
-        for (int i = 0; i < execute_time; ++i) {
-            gantt_chart_data[current_time + i] = current_proc.id; // 記錄甘特圖
+        for (int i = 0; i < execute_time; i++) {
+            gantt_chart_data[current_time + i] = current_proc.id;
         }
 
         current_proc.remaining_burst_time -= execute_time;
@@ -112,7 +111,7 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
         if (current_proc.remaining_burst_time == 0) {
             current_proc.completion_time = current_time;
             completed_processes++;
-            process_queue_level[current_proc.id] = -1; // 已完成
+            process_queue_level[current_proc.id] = -1; // completed
         } else {
             // 降級
             if (current_queue_level == 0) {
@@ -129,8 +128,7 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
         }
     }
 
-    // 將排程後的結果複製回原始行程列表，以便 print_results 函數使用
-    for (size_t i = 0; i < original_processes.size(); ++i) {
+    for (size_t i = 0; i < original_processes.size(); i++) {
         for (const auto& p : processes) {
             if (original_processes[i].id == p.id) {
                 original_processes[i].completion_time = p.completion_time;
@@ -139,6 +137,9 @@ void multilevel_feedback_queue_scheduling(vector<Process> processes) {
         }
     }
 
-    print_gantt_chart(gantt_chart_data);
+    // discard: print_gantt_chart(gantt_chart_data);
+    // 新增：將甘特圖數據保存到 CSV
+    string csv_filename = "MLFQ_gantt_data.csv";
+    save_gantt_chart_data_to_csv(gantt_chart_data, csv_filename);
     print_results(original_processes, context_switches, "Multilevel Feedback Queue Scheduling");
 }
