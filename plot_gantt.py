@@ -13,14 +13,14 @@ def plot_gantt_chart_from_csv(data_file, title, output_filename):
         print(f"Warning: Data file '{data_file}' not found. Skipping plot for {title}.")
         return
 
-    # --- 1. Read Gantt Data ---
+    # 1. Read Gantt Data
     df = pd.read_csv(data_file)
 
     if df.empty:
         print(f"Warning: No Gantt data found in '{data_file}'. Skipping plot for {title}.")
         return
 
-    # --- 2. Process Gantt Data into Segments ---
+    # 2. Process Gantt Data into Segments
     gantt_segments = []
     
     # Sort by time to ensure correct segment processing
@@ -51,7 +51,7 @@ def plot_gantt_chart_from_csv(data_file, title, output_filename):
             'end_time': df['Time'].iloc[-1] + 1 
         })
 
-    # --- 3. Prepare Plotting ---
+    # 3. Prepare Plotting
     fig, ax = plt.subplots(figsize=(15, 4)) # Adjusted figure size for no info box
 
     # Get unique process IDs (excluding idle)
@@ -78,7 +78,7 @@ def plot_gantt_chart_from_csv(data_file, title, output_filename):
     # Max process ID for proper y-axis scaling
     max_pid_for_y = len(all_active_pids) 
     
-    # --- 4. Plotting Gantt Bars ---
+    # 4. Plotting Gantt Bars
     for segment in gantt_segments:
         proc_id = segment['process_id']
         start_time = segment['start_time']
@@ -105,7 +105,7 @@ def plot_gantt_chart_from_csv(data_file, title, output_filename):
             pass
 
 
-    # --- 5. Customize Plot ---
+    # 5. Customize Plot
     # Set y-axis ticks and labels based on processed IDs
     ax.set_yticks(np.arange(max_pid_for_y))
     ax.set_yticklabels(y_tick_labels)
