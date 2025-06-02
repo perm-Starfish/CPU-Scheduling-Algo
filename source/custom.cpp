@@ -7,7 +7,7 @@
 using namespace std;
 
 // custom: Priority-based SJF with Aging
-// 優勢：期望在 turnaround time 和 waiting time 上優於純 RR + priority，同時避免飢餓。
+// 優勢：期望在 turnaround time 和 waiting time 上優於純 RR + priority，同時避免 starvation
 void custom_priority_sjf_aging_scheduling(vector<Process> processes) {
     // 儲存原始副本用於結果輸出，並按ID排序
     vector<Process> original_processes = processes;
@@ -51,7 +51,7 @@ void custom_priority_sjf_aging_scheduling(vector<Process> processes) {
 
         // aging
         for (int idx : ready_queue_indices) {
-            // 如果行程的等待時間超過閾值且不是最高優先級 (priority 1)
+            // 如果行程的等待時間超過 threshold 且不是最高優先級 (priority 1)
             // 這裡的等待時間是：目前時間 - 上次執行/進入queue的時間
             if (processes[idx].priority > 1 && (current_time - processes[idx].last_run_time) >= AGING_THRESHOLD) {
                 processes[idx].priority = max(1, processes[idx].priority - AGING_PRIORITY_BOOST); // boost priority
@@ -68,7 +68,7 @@ void custom_priority_sjf_aging_scheduling(vector<Process> processes) {
             if (pa.priority != pb.priority) {
                 return pa.priority < pb.priority; // priority 小的優先
             }
-            return pa.remaining_burst_time < pb.remaining_burst_time; // 剩餘burst time 短的優先
+            return pa.remaining_burst_time < pb.remaining_burst_time; // 剩餘 burst time 短的優先
         });
 
         if (ready_queue_indices.empty()) {
