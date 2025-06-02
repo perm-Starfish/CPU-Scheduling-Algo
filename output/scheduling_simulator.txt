@@ -1,0 +1,99 @@
+--- Initial Processes ---
+Process ID | Arrival Time | Burst Time | Priority
+--------------------------------------------------
+         1 |           10 |         22 |        2
+         2 |            0 |          6 |        2
+         3 |           10 |         17 |        3
+         4 |            5 |          9 |        2
+         5 |            0 |         18 |        3
+         6 |            5 |         11 |        1
+         7 |            5 |         13 |        2
+         8 |            5 |         11 |        1
+         9 |           10 |         27 |        3
+        10 |           10 |         21 |        3
+--------------------------------------------------
+
+--- Starting Preemptive SJF Scheduling ---
+Gantt chart data saved to preeSJF_gantt_data.csv
+
+--- Preemptive SJF Scheduling Results ---
+Process ID | Arrival Time | Burst Time | Completion Time | Turnaround Time | Waiting Time
+-----------------------------------------------------------------------------------------
+         1 |           10 |         22 |             128 |             118 |           96
+         2 |            0 |          6 |               6 |               6 |            0
+         3 |           10 |         17 |              67 |              57 |           40
+         4 |            5 |          9 |              15 |              10 |            1
+         5 |            0 |         18 |              85 |              85 |           67
+         6 |            5 |         11 |              26 |              21 |           10
+         7 |            5 |         13 |              50 |              45 |           32
+         8 |            5 |         11 |              37 |              32 |           21
+         9 |           10 |         27 |             155 |             145 |          118
+        10 |           10 |         21 |             106 |              96 |           75
+-----------------------------------------------------------------------------------------
+Average Turnaround Time: 61.5 ms
+Average Waiting Time: 46 ms
+Context Switches: 9
+
+--- Starting RR + Non-Preemptive Priority Scheduling ---
+Gantt chart data saved to RR_priority_gantt_data.csv
+
+--- RR + Non-Preemptive Priority Scheduling Results ---
+Process ID | Arrival Time | Burst Time | Completion Time | Turnaround Time | Waiting Time
+-----------------------------------------------------------------------------------------
+         1 |           10 |         22 |              72 |              62 |           40
+         2 |            0 |          6 |              28 |              28 |           22
+         3 |           10 |         17 |             137 |             127 |          110
+         4 |            5 |          9 |              47 |              42 |           33
+         5 |            0 |         18 |             135 |             135 |          117
+         6 |            5 |         11 |              26 |              21 |           10
+         7 |            5 |         13 |              60 |              55 |           42
+         8 |            5 |         11 |              27 |              22 |           11
+         9 |           10 |         27 |             155 |             145 |          118
+        10 |           10 |         21 |             153 |             143 |          122
+-----------------------------------------------------------------------------------------
+Average Turnaround Time: 78 ms
+Average Waiting Time: 62.5 ms
+Context Switches: 34
+
+--- Starting Multilevel Feedback Queue Scheduling ---
+Gantt chart data saved to MLFQ_gantt_data.csv
+
+--- Multilevel Feedback Queue Scheduling Results ---
+Process ID | Arrival Time | Burst Time | Completion Time | Turnaround Time | Waiting Time
+-----------------------------------------------------------------------------------------
+         1 |           10 |         22 |             135 |             125 |          103
+         2 |            0 |          6 |              51 |              51 |           45
+         3 |           10 |         17 |             137 |             127 |          110
+         4 |            5 |          9 |              65 |              60 |           51
+         5 |            0 |         18 |             128 |             128 |          110
+         6 |            5 |         11 |              71 |              66 |           55
+         7 |            5 |         13 |              79 |              74 |           61
+         8 |            5 |         11 |              85 |              80 |           69
+         9 |           10 |         27 |             149 |             139 |          112
+        10 |           10 |         21 |             155 |             145 |          124
+-----------------------------------------------------------------------------------------
+Average Turnaround Time: 99.5 ms
+Average Waiting Time: 84 ms
+Context Switches: 24
+
+--- Starting Custom: Priority-based SJF with Aging Scheduling ---
+Gantt chart data saved to custom_gantt_data.csv
+
+--- Custom: Priority-based SJF with Aging Scheduling Results ---
+Process ID | Arrival Time | Burst Time | Completion Time | Turnaround Time | Waiting Time
+-----------------------------------------------------------------------------------------
+         1 |           10 |         22 |             128 |             118 |           96
+         2 |            0 |          6 |              21 |              21 |           15
+         3 |           10 |         17 |              67 |              57 |           40
+         4 |            5 |          9 |              37 |              32 |           23
+         5 |            0 |         18 |              85 |              85 |           67
+         6 |            5 |         11 |              16 |              11 |            0
+         7 |            5 |         13 |              50 |              45 |           32
+         8 |            5 |         11 |              28 |              23 |           12
+         9 |           10 |         27 |             155 |             145 |          118
+        10 |           10 |         21 |             106 |              96 |           75
+-----------------------------------------------------------------------------------------
+Average Turnaround Time: 63.3 ms
+Average Waiting Time: 47.8 ms
+Context Switches: 11
+
